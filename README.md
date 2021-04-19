@@ -1,11 +1,9 @@
 # sell-globalrank-levelranks
 
-This is a Sourcemod Plugin [Levels Ranks] Core Module 
-
-[Levels Ranks] Core v3.1.6 Author	-> freak.exe_uLow
-https://forums.alliedmods.net/showthread.php?t=318782
+This is a Sourcemod Plugin [Levels Ranks] Module 
 
 This module allows you to sell your ingame global rank for Store Credits
+You Can Sell Your Ingame Global Elite Rank To Server Or Player Ingame
 
 I am begineer in coding so there might be lots of things which can be wrong feel free to correct me :)
 
