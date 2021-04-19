@@ -1,0 +1,56 @@
+"Phrases"
+{
+  "menuitem"
+  {
+    "en"  "Server %i Credits"
+  }
+
+  "norank"
+  {
+    "en"  "{lime}[SellRank] You Don't Have Global Elite Rank"
+  }
+  
+  "menutitle"
+  {
+    "en"  "Sell Global Rank"
+  }
+
+  "sellserver"
+  {
+    "en"  "{lime}[SellRank] Sold Global Elite Rank To Server Added %i Store Credits"
+  }
+
+  "sellrequest"
+  {
+    "en"  "[SellRank] %s Wants To Sell You Global Elite Rank For %i Credits"
+  }
+
+  "requestwaiting"
+  {
+    "en"  "{lime}[SellRank] Awaiting %s Response For Selling Global Rank For %i Store Credits"
+  }
+
+  "enoughcredit"
+  {
+    "en"  "{lime}[SellRank] %s Doesn't Have Required %i Store Credits"
+  }
+
+   "rankrecieved"
+  {
+    "en"  "{lime}[SellRank] You Just Got Global Elite Rank %i Store Credits Deducted"
+  }
+
+   "ranksold"
+  {
+    "en"  "{lime}[SellRank] Rank Sold For %i Store Credits Your Rank Has Been Resetted"
+  }
+  
+   "offerreject1"
+  {
+    "en"  "{lime}[SellRank] %s Declined Your Offer"
+  }
+    "offerreject2"
+  {
+    "en"  "{lime}[SellRank] You Declined %s Offer"
+  }
+}
