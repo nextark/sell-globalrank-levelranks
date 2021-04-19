@@ -7,7 +7,7 @@ ConVar c_servercredit,
 	   c_playercredit;
 
 int playerrank[MAXPLAYERS+1],
-    servercredit,
+	servercredit,
 	playercredit,
 	userclient,
 	targetclient;
@@ -44,7 +44,7 @@ public void OnPluginStart(){
 public int OnSettingChanged(Handle convar, const char[] oldValue, const char[] newValue)
 {
 	if (StrEqual(oldValue, newValue, true))
-        return;
+		return;
 	
 	if (convar == c_servercredit)
 	{
@@ -71,8 +71,8 @@ public Action checksellrank(int client,int args)
 	Format(itemname, sizeof(itemname), "%T", "menuitem", client,servercredit);
 	if (playerrank[client]<18)
 	{
-    CPrintToChat(client,"%t","norank");
-    return Plugin_Handled;
+	CPrintToChat(client,"%t","norank");
+	return Plugin_Handled;
 	}
 
 	else {
@@ -86,16 +86,15 @@ public Action checksellrank(int client,int args)
 	{
 		if (i != client && IsClientInGame(i))
 		{
-			IntToString(GetClientUserId(i), sID, sizeof(sID));
-    		GetClientName(i,sName,sizeof(sName));
-    		AddMenuItem(menu, sID, sName);
+		IntToString(GetClientUserId(i), sID, sizeof(sID));
+		GetClientName(i,sName,sizeof(sName));
+		AddMenuItem(menu, sID, sName);
 		}
 	}
 	 
 	menu.Display(client, MENU_TIME_FOREVER);
 	}
-        return Plugin_Continue;
-
+	return Plugin_Continue;
 }
 
 
@@ -113,39 +112,41 @@ public sellrankhandler(Handle:menu, MenuAction:action, client, param2)
 	if (action == MenuAction_Select)
 	{
 		if (StrEqual(item, "server"))
-        {
+		{
 		Store_SetClientCredits(userclient, Store_GetClientCredits(userclient) + servercredit);
 		LR_ResetPlayerStats(userclient);
 		CPrintToChat(userclient, "%t","sellserver",servercredit);
 		delete menu;
-    	} 
+		} 
 		else
 		{   
 
 		GetClientName(userclient, username, sizeof(username));
 		GetClientName(targetclient, targetname, sizeof(targetname));
-    		
-			if(Store_GetClientCredits(targetclient)>=playercredit)
+			
+		if(Store_GetClientCredits(targetclient)>=playercredit)
 			{
-    			char titlemenu[255];
-    			Format(titlemenu, sizeof(titlemenu), "%t","sellrequest",username,playercredit,targetclient);
-    			Menu menuconfirm = new Menu(confirmsellrankHandler);
-    			menuconfirm.SetTitle(titlemenu);
-    			menuconfirm.AddItem("yes", "Yes");
-    			menuconfirm.AddItem("no", "No");
-    			menuconfirm.ExitButton = false;
-    			menuconfirm.Display(targetclient, MENU_TIME_FOREVER);
-				CPrintToChat(userclient,"%t","requestwaiting",targetname,playercredit);
+				char titlemenu[255];
+				Format(titlemenu, sizeof(titlemenu), "%t","sellrequest",username,playercredit,targetclient);
+				Menu menuconfirm = new Menu(confirmsellrankHandler);
+				menuconfirm.SetTitle(titlemenu);
+				menuconfirm.AddItem("yes", "Yes");
+				menuconfirm.AddItem("no", "No");
+				menuconfirm.ExitButton = false;
+				menuconfirm.Display(targetclient, MENU_TIME_FOREVER);
+		   		CPrintToChat(userclient,"%t","requestwaiting",targetname,playercredit);
+				delete menu;
 			}
 			else
 			{
 		   		CPrintToChat(userclient,"%t", "enoughcredit",targetname,playercredit);
+				delete menu;
+
 			}
-	    }	   		
+		}	   		
 	}
 	
-return Plugin_Continue;
-
+	delete menu;
 }
 
 public confirmsellrankHandler(Handle:menuconfirm, MenuAction action, param1, param2)
@@ -153,14 +154,14 @@ public confirmsellrankHandler(Handle:menuconfirm, MenuAction action, param1, par
 	targetclient = param1;
 	new String:pending[64];
 	GetMenuItem(menuconfirm, param2, pending, sizeof(pending));
-    if (action == MenuAction_Select)
-    {
+	if (action == MenuAction_Select)
+	{
  		if (StrEqual(pending, "yes"))
-        {
+		{
 			LR_ChangeClientValue(targetclient,10000);
 			Store_SetClientCredits(targetclient, Store_GetClientCredits(targetclient) - playercredit);
 			CPrintToChat(targetclient,"%t","rankrecieved",playercredit);
-	    	Store_SetClientCredits(userclient, Store_GetClientCredits(userclient) + playercredit);
+			Store_SetClientCredits(userclient,Store_GetClientCredits(userclient)+playercredit);
 			LR_ResetPlayerStats(userclient);
 			CPrintToChat(userclient,"%t","ranksold",playercredit);
 			delete menuconfirm;
@@ -171,7 +172,6 @@ public confirmsellrankHandler(Handle:menuconfirm, MenuAction action, param1, par
 			CPrintToChat(targetclient,"%t", "offerreject2",username); 
 			delete menuconfirm;
 		}
-    }
-	
-return Plugin_Handled;
+	}
+	delete menuconfirm;
 }
